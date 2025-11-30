@@ -1,163 +1,216 @@
-# Celo Wallet with QR Code Support
+# Octo 🐙
 
-A simple, user-friendly EVM-compatible wallet built for the Celo blockchain on MiniPay, with comprehensive QR code capabilities.
+A Web3 space shooter game with integrated MiniPay wallet - play, send, and receive CELO tokens seamlessly.
 
-## Features
+## 🎮 Game Features
 
-### 🔐 Wallet Management
-- **Connect Wallet**: Connect your MetaMask or other Web3 wallet via RainbowKit
-- **View Balance**: Display your CELO token balance in real-time
-- **Copy Address**: Quick-copy your wallet address to clipboard
-- **Multi-Chain Support**: Works with Celo Mainnet, Alfajores (testnet), and Sepolia (testnet)
+- **Balance-Gated Access**: Hold at least 0.2 CELO to unlock and play the game
+- **Fibonacci Level Progression**: 10 levels following the Fibonacci sequence (100, 200, 300, 500, 800, 1300, 2100, 3400, 5500, 8900 points)
+- **Lives System**: Start with 3 lives, collect heart pickups to gain more (max 5 lives)
+- **Invincibility Mechanic**: 2-second invincibility period after taking damage (player flashes)
+- **Dynamic Difficulty**: Enemy spawn rates and movement speed increase with each level
+- **Life Pickups**: Heart drops with scaling rates (2%/5%/8% based on level tier)
+- **High Score Tracking**: Personal best saved locally - challenge yourself!
+- **Dark Mode**: Toggle between light mode and ocean-themed dark mode with animated waves
+- **WASD/Arrow Keys**: Smooth keyboard controls for movement
+- **Space to Shoot**: Unlimited bullets - keep firing!
+- **Dynamic Tips**: Rotating game tips every 60 seconds with Fibonacci facts
 
-### 📱 QR Code Capabilities
+## 🔐 Wallet Features
 
-#### Receive Funds
-- **Generate QR Code**: Instantly create a QR code for your wallet address
-- **Download QR Code**: Save your wallet QR code as a PNG image
-- **Share Address**: Easily share your address for receiving payments
+- **Connect Wallet**: RainbowKit integration (MetaMask, Coinbase Wallet, WalletConnect)
+- **Real-Time Balance**: View your CELO balance with automatic updates
+- **QR Code Generation**: Generate QR codes for receiving funds
+- **QR Code Scanner**: Scan recipient addresses with your camera
+- **Send Transactions**: Send CELO tokens with transaction status tracking
+- **Copy Address**: One-click address copying to clipboard
+- **Multi-Chain Support**: Celo Mainnet, Alfajores (testnet), and Sepolia (testnet)
 
-#### Send Funds
-- **QR Scanner**: Scan recipient wallet QR codes using your device camera
-- **Manual Entry**: Type addresses manually or use QR scanning
-- **Transaction Confirmation**: Real-time transaction status updates
-- **Success Feedback**: Clear confirmation when transactions complete
-
-### 💸 Send Transactions
-- Enter recipient address (manually or via QR scan)
-- Specify amount in CELO
-- Real-time transaction status
-- Transaction hash display upon success
-
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
-- pnpm (or npm/yarn)
-- A Web3 wallet (MetaMask recommended)
+- Node.js 18 or higher
+- pnpm (recommended), npm, or yarn
+- A Web3 wallet browser extension (MetaMask recommended)
+- At least 0.2 CELO to play the game
 
 ### Installation
 
-The required dependencies are already installed:
-- `qrcode.react` - QR code generation
-- `html5-qrcode` - QR code scanning
-- `wagmi` & `viem` - Ethereum interactions
-- `@rainbow-me/rainbowkit` - Wallet connection
-
-### Running the Application
-
-1. Start the development server:
+1. **Clone the repository**
 ```bash
-cd apps/web
+git clone https://github.com/IanoNjuguna/octo.git
+cd octo
+```
+
+2. **Install dependencies**
+```bash
+pnpm install
+```
+
+3. **Start the development server**
+```bash
 pnpm dev
 ```
 
-2. Open your browser to `http://localhost:3002` (or the port shown in terminal)
+4. **Open localhost in your browser**
+Navigate to `http://localhost:<port shown in terminal>`
 
-3. Connect your wallet using the "Connect Wallet" button in the navbar
+## 🎯 How to Play
 
-### Configuration
+1. **Connect Your Wallet**
+   - Click "Connect Wallet" in the top navigation bar
+   - Select your preferred wallet (MetaMask, Coinbase, etc.)
+   - Approve the connection
 
-Set your WalletConnect Project ID in `.env.local`:
+2. **Get CELO Tokens**
+   - You need at least 0.2 CELO to play
+   - If you don't have enough, visit the Wallet page to get your address/QR code
+   - Get testnet CELO from [Celo Faucet](https://faucet.celo.org/) (for Alfajores testnet)
+
+3. **Start Playing**
+   - Navigate to the home page
+   - Once you have 0.2+ CELO, the game will unlock automatically
+   - Click "START GAME" to begin
+   - Use **WASD** or **Arrow Keys** to move your ship
+   - Press **Space** to shoot enemies
+   - Press **P** or click Pause button to pause
+
+4. **Game Mechanics**
+   - Destroy enemies to earn points
+   - Collect heart pickups to gain extra lives
+   - Avoid enemy collisions (you'll lose a life)
+   - Survive as long as possible and reach higher levels
+   - Game ends when you run out of lives
+
+## 🏗️ Project Structure
+
 ```
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id_here
+octo/
+├── apps/
+│   ├── web/                    # Next.js application
+│   │   ├── src/
+│   │   │   ├── app/            # App router pages
+│   │   │   │   ├── page.tsx    # Home/Game page
+│   │   │   │   ├── game/       # Game page (redirects to home)
+│   │   │   │   └── wallet/     # Wallet management page
+│   │   │   ├── components/
+│   │   │   │   ├── space-shooter-game.tsx     # Main game component
+│   │   │   │   ├── check-celo-balance.tsx     # Balance gate component
+│   │   │   │   ├── wallet-dashboard.tsx       # Wallet UI
+│   │   │   │   ├── send-transaction.tsx       # Send CELO
+│   │   │   │   ├── qr-scanner.tsx             # QR code scanning
+│   │   │   │   ├── receive-qr-code.tsx        # QR code generation
+│   │   │   │   ├── receive-dropdown.tsx       # Quick receive dropdown
+│   │   │   │   ├── theme-provider.tsx         # Dark mode
+│   │   │   │   ├── theme-toggle.tsx           # Theme switcher
+│   │   │   │   └── ui/                        # shadcn/ui components
+│   │   │   └── lib/
+│   │   └── package.json
+│   └── contracts/              # Hardhat setup (no active contracts)
+└── package.json                # Workspace root
 ```
 
-Get a free Project ID at [WalletConnect Cloud](https://cloud.walletconnect.com/)
+## 🛠️ Tech Stack
 
-## Usage Guide
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui (Radix UI)
+- **Blockchain**: Celo (EVM-compatible)
+- **Web3 Libraries**: 
+  - Wagmi v2 (React hooks for Ethereum)
+  - Viem (TypeScript Ethereum library)
+  - RainbowKit (Wallet connection UI)
+- **QR Codes**:
+  - qrcode.react (generation)
+  - html5-qrcode (scanning)
+- **Game**: HTML5 Canvas with requestAnimationFrame
+- **Monorepo**: Turborepo with pnpm workspaces
 
-### Receiving Tokens
+## 🌐 Supported Networks
 
-1. Click the **"Receive"** button in the wallet dashboard
-2. Your wallet address QR code will be displayed
-3. Share the QR code or copy the address
-4. Optionally download the QR code for offline sharing
+- **Celo Mainnet** (Chain ID: 42220)
+- **Celo Alfajores Testnet** (Chain ID: 44787) - Recommended for testing
+- **Celo Sepolia Testnet** (Chain ID: 11142220)
 
-### Sending Tokens
+## 📱 Wallet Usage
 
-1. Click the **"Send"** button in the wallet dashboard
-2. Enter or scan the recipient's address:
-   - Click the QR icon to scan a QR code
-   - Or paste/type the address manually
-3. Enter the amount of CELO to send
-4. Click **"Send Transaction"**
-5. Confirm the transaction in your wallet
-6. Wait for blockchain confirmation
+### Receiving CELO
 
-### QR Code Scanning
+1. Navigate to the Wallet page
+2. Click "Receive" button
+3. Share your QR code or copy your address
+4. Optional: Download the QR code as PNG
 
-To scan a QR code:
-1. Click the QR icon button
-2. Allow camera access when prompted
-3. Point your camera at the QR code
-4. The address will be automatically filled when detected
+### Sending CELO
 
-## Components
+1. Navigate to the Wallet page
+2. Click "Send" button
+3. Enter recipient address (or click QR icon to scan)
+4. Enter amount to send
+5. Click "Send Transaction"
+6. Confirm in your wallet
+7. Wait for transaction confirmation
 
-### WalletDashboard
-Main wallet interface displaying balance, address, and action buttons.
+## 🎨 Themes
 
-### ReceiveQRCode
-Generates and displays a QR code for receiving payments. Includes download functionality.
+Octo supports light and dark modes:
+- **Light Mode**: Clean, modern interface
+- **Dark Mode**: Ocean-themed with animated wave background in game
 
-### QRScanner
-Camera-based QR code scanner for reading wallet addresses from QR codes.
+Toggle using the sun/moon icon in the navigation bar.
 
-### SendTransaction
-Transaction form with QR scanning support, validation, and status tracking.
+## 🐛 Troubleshooting
 
-## Tech Stack
+### Game Won't Start
+- **Issue**: "Can't Play Yet - Need More CELO"
+- **Solution**: You need at least 0.2 CELO. Visit the Wallet page to get your address and fund it.
 
-- **Next.js 14** - React framework
-- **Wagmi v2** - React hooks for Ethereum
-- **Viem** - TypeScript Ethereum library
-- **RainbowKit** - Wallet connection UI
-- **TailwindCSS** - Styling
-- **Radix UI** - UI components
-- **qrcode.react** - QR code generation
-- **html5-qrcode** - QR code scanning
+### Balance Not Updating
+- **Solution**: Disconnect and reconnect your wallet, or refresh the page.
 
-## Network Support
-
-- Celo Mainnet (Chain ID: 42220)
-- Celo Alfajores Testnet (Chain ID: 44787)
-- Celo Sepolia Testnet (Chain ID: 11142220)
-
-## Security Notes
-
-- Never share your private keys or seed phrase
-- Always verify recipient addresses before sending
-- Start with small test transactions on testnets
-- Double-check transaction details before confirming
-
-## Browser Compatibility
-
-- Chrome/Edge (recommended for camera access)
-- Firefox
-- Safari (iOS/macOS)
-- Brave
-
-**Note**: Camera access for QR scanning requires HTTPS in production.
-
-## Troubleshooting
-
-### Camera Not Working
-- Ensure you've granted camera permissions
-- Use HTTPS (required for camera access in production)
-- Check if another app is using the camera
+### Camera Not Working (QR Scanner)
+- Ensure you've granted camera permissions in your browser
+- HTTPS is required for camera access (localhost works for development)
+- Check if another application is using the camera
 
 ### Transaction Failing
 - Ensure you have enough CELO for the transaction + gas fees
-- Check you're on the correct network
-- Verify the recipient address is valid
+- Verify you're on the correct network (check wallet network dropdown)
+- Check the recipient address is a valid Ethereum address
 
-### Wallet Not Connecting
+### Wallet Connection Issues
 - Refresh the page
-- Check your wallet extension is unlocked
+- Make sure your wallet extension is unlocked
 - Try disconnecting and reconnecting
-- Ensure you're on a supported network
+- Switch to a supported network (Celo, Alfajores, or Sepolia)
 
-## License
+## 🔒 Security Notes
+
+- Never share your private keys or seed phrase with anyone
+- Always verify recipient addresses before sending transactions
+- Start with small test amounts on testnets (Alfajores)
+- Double-check transaction details before confirming
+- The game only checks your balance - your CELO stays in your wallet
+
+## 🌟 Game Tips
+
+- **Invincibility**: After taking damage, you flash for 2 seconds - use this time to reposition
+- **Fibonacci Progression**: Score thresholds follow the Fibonacci sequence
+- **Enemy Health**: Some enemies require multiple hits - look for health bars
+- **Unlimited Ammo**: Don't be shy - keep shooting!
+- **Dark Mode**: Try the ocean wave background for an immersive experience
+
+## 📄 License
 
 MIT
+
+## 🙏 Acknowledgments
+
+- Built on the [Celo](https://celo.org/) blockchain
+- Wallet infrastructure by [RainbowKit](https://www.rainbowkit.com/)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+
+---
+
+**Ready to play?** Get some CELO and start your space adventure! 🚀🐙

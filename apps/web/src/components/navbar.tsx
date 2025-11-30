@@ -12,9 +12,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { WalletConnectButton } from "@/components/connect-button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
-const navLinks = [
+const navLinks: Array<{ name: string; href: string; external?: boolean }> = [
   { name: "Home", href: "/" },
+  { name: "Wallet", href: "/wallet" },
 ]
 
 export function Navbar() {
@@ -36,7 +38,7 @@ export function Navbar() {
               <div className="flex items-center gap-2 mb-8">
 
                 <span className="font-bold text-lg">
-                  Seti
+                  Octo
                 </span>
               </div>
               <nav className="flex flex-col gap-4">
@@ -44,13 +46,20 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
                     className={`flex items-center gap-2 text-base font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-foreground/70"
                       }`}
                   >
                     {link.name}
+                    {link.external && <ExternalLink className="h-4 w-4" />}
                   </Link>
                 ))}
-                <div className="mt-6 pt-6 border-t">
+                <div className="mt-6 pt-6 border-t space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Theme</span>
+                    <ThemeToggle />
+                  </div>
                   <WalletConnectButton />
                 </div>
               </nav>
@@ -61,7 +70,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
 
             <span className="hidden font-bold text-xl sm:inline-block">
-              Seti
+              Octo
             </span>
           </Link>
         </div>
@@ -72,16 +81,20 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
                 ? "text-foreground"
                 : "text-foreground/70"
                 }`}
             >
               {link.name}
+              {link.external && <ExternalLink className="h-4 w-4" />}
             </Link>
           ))}
 
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <WalletConnectButton />
           </div>
         </nav>

@@ -9,6 +9,7 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 200,
       },
+      viaIR: true,
     },
   },
   networks: {
@@ -20,9 +21,10 @@ const config: HardhatUserConfig = {
     },
     // Celo Alfajores Testnet
     alfajores: {
-      url: "https://alfajores-forno.celo-testnet.org",
+      url: process.env.ALFAJORES_RPC_URL || "https://celo-alfajores.blockpi.network/v1/rpc/public",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 44787,
+      timeout: 120000,
     },
     // Celo Sepolia Testnet
     sepolia: {
