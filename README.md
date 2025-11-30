@@ -1,5 +1,7 @@
 # Octo 🐙
 
+Live: [octo-wallet.vercel.app](https://octo-wallet.vercel.app)
+
 A Web3 space shooter game with integrated MiniPay wallet - play, send, and receive CELO tokens seamlessly.
 
 ## 🎮 Game Features
